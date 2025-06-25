@@ -1,4 +1,4 @@
-package com.service.strings;
+package com.dsaPrep.strings;
 //TC : O(N^2)
 //SC : O(N)
 public class RotateString {

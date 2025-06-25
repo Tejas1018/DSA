@@ -1,4 +1,4 @@
-package com.service.strings;
+package com.dsaPrep.strings;
 
 import java.util.HashMap;
 import java.util.Map;
