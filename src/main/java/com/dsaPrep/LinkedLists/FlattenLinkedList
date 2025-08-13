@@ -1,4 +1,4 @@
-```
+
     Node flatten(Node root) {
         if(root == null || root.next == null) return root;
         Node head2 = flatten(root.next);
@@ -20,4 +20,5 @@
         }
         return result;
     }
-```
+
+
