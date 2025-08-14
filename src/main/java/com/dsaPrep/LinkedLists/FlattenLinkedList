@@ -1,0 +1,21 @@
+    Node flatten(Node root) {
+        if(root == null || root.next == null) return root;
+        Node head2 = flatten(root.next);
+        root =  mergeTwoLL(root,head2);
+        return root;
+    }
+
+    Node mergeTwoLL(Node curr1,Node curr2){
+        if(curr1 == null) return curr2;
+        if(curr2 == null) return curr1;
+        Node result = null;
+        if(curr1.data <= curr2.data){
+            result = curr1;
+            result.bottom = mergeTwoLL(curr1.bottom,curr2);
+        }
+        else{
+            result = curr2;
+            result.bottom = mergeTwoLL(curr1,curr2.bottom);
+        }
+        return result;
+    }
