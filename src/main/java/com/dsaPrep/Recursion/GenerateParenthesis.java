@@ -1,0 +1,28 @@
+package com.dsaPrep.Recursion;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenerateParenthesis {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        String current = "";
+
+        backtracking(n,current,result,0,0);
+        return result;
+    }
+
+    void backtracking(int totalLength,String current,List<String> result,int open,int close){
+        if(current.length() == totalLength * 2){
+            result.add(current);
+            return;
+        }
+
+        if(open < totalLength){
+            backtracking(totalLength,current+"(",result,open+1,close);
+        }
+        if(close < open){
+            backtracking(totalLength,current+")",result,open,close+1);
+        }
+    }
+}
