@@ -1,4 +1,5 @@
-    ``` public List<String> generateParenthesis(int n) {
+## Update
+public List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
         String current = "";
 
@@ -19,4 +20,4 @@
             backtracking(totalLength,current+")",result,open,close+1);
         }
     }
-    ```
+    
