@@ -1,0 +1,39 @@
+    int front, rear;
+    int arr[] = new int[100005];
+
+    MyQueue() {
+        front = 0;
+        rear = 0;
+    }
+    int current_size = 0;   // Array size
+
+    // Function to push an element x in a queue.
+    void push(int x) {
+
+       if(current_size == 0){
+           front++;
+           rear++;
+           arr[rear%100005] = x;
+       }
+       else{
+           rear = (rear+1) % 100005;
+           arr[rear] = x;
+       }
+        current_size++;
+    }
+
+    // Function to pop an element from queue and return that element.
+    int pop() {
+
+        if(current_size == 0) return -1;
+        int ele = arr[front];
+        if(current_size == 1){
+            front--;
+            rear--;
+        }
+        else{
+            front = (front+1)%100005;
+        }
+        current_size--;
+        return ele;
+    }
