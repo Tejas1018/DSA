@@ -1,0 +1,25 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+      // store the greatest element to the right for every element in nums2
+      // from map get the greater element for every values in nums1
+
+      Map<Integer,Integer> map = new HashMap<>();
+      Stack<Integer> stack = new Stack<>();
+      int result[] = new int[n1];  
+
+      for(int num : nums2){
+            while(!stack.isEmpty() && num > stack.peek()){
+                map.put(stack.pop(),num);
+            }
+            stack.push(num);
+        }
+
+        int i = 0;
+        for(int ele : nums1){
+            result[i] = map.getOrDefault(ele,-1);
+            i++;
+        }
+        return result;
+    }
+}
