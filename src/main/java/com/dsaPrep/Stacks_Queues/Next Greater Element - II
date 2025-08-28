@@ -1,0 +1,26 @@
+// Hipothetically assume double the array.
+// pop all the elements from the stack if the current ele is greater than the top element of the stack.
+// if not the top element is not greater , check if the index is in origial index value if yes push the top of the stack to the current index value.
+// If stack is Empty return -1
+
+
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int length = nums.length;
+        int result[] = new int[length];
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i = 2 * length-1; i >= 0 ; i--){
+            while(!stack.isEmpty() && stack.peek() <= nums[i%length]){
+                stack.pop();
+            }
+
+            if(i < length){
+                result[i] = stack.isEmpty() ? -1 : stack.peek();
+            }
+            stack.push(nums[i%length]);
+        }
+
+        return result;
+    }
+}
