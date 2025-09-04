@@ -1,0 +1,58 @@
+#### BRUTE FORCE ####
+TC : O(N^2)
+
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int length = arr.length;
+        int total_sum = 0;
+        int mod = 1000000007;
+        for(int i = 0 ; i < length; i++){
+            int min = Integer.MAX_VALUE;
+            for(int j = i; j < length; j++){
+                min = Math.min(min,arr[j]);
+                total_sum = (total_sum + min) % mod;
+            }
+        }
+        return total_sum % mod;
+    }
+}
+
+
+### OPTIMIZED SOLUTION #####
+TC : O(3N)
+SC : O(N)
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int length = arr.length;
+        int pse[] = new int[length];
+        int nse[] = new int[length];
+        Stack<Integer> stack = new Stack<>();
+
+        // PSE
+        for(int i = 0 ; i < length; i++){
+            while(!stack.isEmpty() && arr[stack.peek()] >= arr[i]){
+                stack.pop();
+            }
+            pse[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+        stack.clear();
+
+        // NSE
+        for(int i = length-1 ; i >= 0 ; i--){
+            while(!stack.isEmpty() && arr[stack.peek()] > arr[i]){
+                stack.pop();
+            } 
+            nse[i] = stack.isEmpty() ? length : stack.peek();
+            stack.push(i);
+        }
+
+        long total_sum = 0;
+        int mod = (int) 1e9 + 7;
+        for(int i = 0 ; i < length; i++){
+            total_sum =  (total_sum +(long) (((i - pse[i]) * (nse[i] - i)) % mod) * arr[i]) % mod;
+        }
+        total_sum = total_sum % mod;
+        return (int) total_sum;
+    }
+}
