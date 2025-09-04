@@ -1,0 +1,29 @@
+###### BRUTE FORCE SOLUTION #########
+TC : O(N^2)
+SC : O(N)
+class Solution {
+    public int trap(int[] height) {
+        int length = height.length;
+        int total = 0;
+        for (int i = 0; i < length; i++) {
+            int maxL = 0;
+            int maxR = 0;
+            for (int j = 0; j < i; j++) {
+                maxL = Math.max(maxL,height[j]);
+            }
+
+            for(int j = i+1; j < length; j++){
+                maxR = Math.max(maxR,height[j]);
+            }
+            int min_height = Math.min(maxL,maxR);
+            if(min_height > height[i]){
+                total += (min_height-height[i]);
+            }
+        }
+        return total;
+    }
+}
+
+#### OPTIMIZED SOLUTION #########
+TC : O(4N)
+SC : O(4N)
