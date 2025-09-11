@@ -1,0 +1,23 @@
+class Solution {
+    public int numberOfSubarrays(int[] nums, int k) {
+        return countSubarrays(nums,k) - countSubarrays(nums,k-1);
+    }
+
+    int countSubarrays(int arr[],int k){
+        int n = arr.length;
+        int count = 0;
+        int l = 0;
+        int r = 0;
+        int curr_sum = 0;
+        while(r < n){
+            curr_sum += arr[r]%2;
+            while(curr_sum  > k){
+                curr_sum -= arr[l]%2;
+                l = l+1;
+            }
+            count += r-l+1;
+            r++;
+        }
+        return count;
+    }
+}
