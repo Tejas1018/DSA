@@ -1,0 +1,22 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return atmost(nums,goal) - atmost(nums,goal-1);
+    }
+    int atmost(int nums[],int goal){
+        int length = nums.length;
+        int left = 0;
+        int right = 0;
+        int sum = 0;
+        int count = 0;
+        while(right < length){
+            sum = sum + nums[right];
+            while(sum > goal && left <= right){
+                sum = sum - nums[left];
+                left++;
+            }
+            count += (right-left+1);
+            right++;
+        }
+        return count;
+    }
+}
