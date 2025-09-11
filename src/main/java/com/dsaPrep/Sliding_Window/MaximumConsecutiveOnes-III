@@ -1,0 +1,45 @@
+--- Brute force solution ----
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int n = nums.length;
+        int res = 0;
+        for(int i = 0 ; i < n ; i++){
+            int count_ones = 0;
+            for(int j = i; j < n ; j++){
+                if(nums[j] == 1) count_ones++;
+                int changes = ((j-i+1)-count_ones);
+                if(changes <= k){
+                    res = Math.max(res,j-i+1);
+                }
+            }
+        }
+        return res;
+    }
+}
+
+############# OPTIMIZED
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int length = nums.length;
+        int left = 0;
+        int right = 0;
+        int maxLength = 0;
+        int zeros = 0;
+        while(right < length){
+            if(nums[right] == 0){
+                zeros++;
+            }
+            if(zeros > k){
+                if(nums[left] == 0){
+                    zeros--;
+                }
+                left++;
+            }
+            int max = right-left+1;
+            maxLength = Math.max(maxLength,max);
+            right++;
+        }
+        return maxLength;
+    }
+}
